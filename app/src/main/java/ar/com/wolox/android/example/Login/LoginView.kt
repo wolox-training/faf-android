@@ -7,7 +7,6 @@ interface LoginView {
     fun dummyFunction2() {}
 
     fun dummyFunction3() {}
-    fun dummyFunction4() {}
 
 
     fun gotToWeb()
