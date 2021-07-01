@@ -7,7 +7,6 @@ import ar.com.wolox.wolmo.core.activity.WolmoActivity
 class ExampleActivity : WolmoActivity<ActivityBaseBinding>() {
 
     override fun layout() = R.layout.activity_base
-
     override fun init() {
         replaceFragment(binding.activityBaseContent.id, ExampleFragment.newInstance())
     }

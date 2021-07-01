@@ -5,7 +5,6 @@ apply plugin: 'idea'
 apply plugin: 'com.hiya.jacoco-android'
 apply from: 'keystore.gradle'
 apply from: '../quality.gradle'
-apply from: '../scripts/warp/warp_task.gradle'
 apply from: '../scripts/sanity/sanity_task.gradle'
 
 idea {
@@ -152,4 +151,7 @@ dependencies {
     // Android KTX
     implementation "androidx.core:core-ktx:$android_ktx_version"
     implementation "androidx.fragment:fragment-ktx:$android_ktx_version"
+
+
+
 }
