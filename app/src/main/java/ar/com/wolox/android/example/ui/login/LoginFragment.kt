@@ -1,4 +1,4 @@
-package ar.com.wolox.android.example.Login
+package ar.com.wolox.android.example.ui.login
 
 import androidx.core.widget.addTextChangedListener
 import ar.com.wolox.android.R

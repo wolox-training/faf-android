@@ -1,4 +1,4 @@
-package ar.com.wolox.android.example.Login
+package ar.com.wolox.android.example.ui.login
 
 interface LoginView {
 
