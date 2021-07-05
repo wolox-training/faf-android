@@ -15,4 +15,6 @@ class LoginPresenter constructor() : BasePresenter<LoginView>() {
     fun onClickTerms() = view?.gotToWeb()
 
     fun onClickDummy()= view?.dummyFunction4()
+    fun onClickDummy2()= view?.dummyFunction5()
+
 }
