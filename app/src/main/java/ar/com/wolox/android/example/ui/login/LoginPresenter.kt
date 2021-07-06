@@ -1,20 +1,20 @@
 package ar.com.wolox.android.example.ui.login
 
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
+import javax.inject.Inject
 
-class LoginPresenter constructor() : BasePresenter<LoginView>() {
+class LoginPresenter @Inject constructor() : BasePresenter<LoginView>() {
 
     fun onClickLogin(fistName: String, lastName: String) {
         view?.dummyFunction()
     }
 
     fun onClickSingup() {
-        view?.dummyFunction2()
+        view?.dummyFunctionTwo()
     }
 
-    fun onClickTerms() = view?.gotToWeb()
+    fun onClickTerms() = view?.goToWeb()
 
-    fun onClickDummy()= view?.dummyFunction4()
-    fun onClickDummy2()= view?.dummyFunction5()
-
+    fun onClickDummy() = view?.dummyFunctionFour()
+    fun onClickDummy2() = view?.dummyFunctionFive()
 }

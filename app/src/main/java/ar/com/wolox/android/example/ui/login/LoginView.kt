@@ -4,13 +4,13 @@ interface LoginView {
 
     fun dummyFunction() {}
 
-    fun dummyFunction2() {}
+    fun dummyFunctionTwo() {}
 
-    fun dummyFunction3() {}
+    fun dummyFunctionThree() {}
 
-    fun dummyFunction4() {}
+    fun dummyFunctionFour() {}
 
-    fun dummyFunction5() {}
+    fun dummyFunctionFive() {}
 
-    fun gotToWeb()
+    fun goToWeb()
 }
