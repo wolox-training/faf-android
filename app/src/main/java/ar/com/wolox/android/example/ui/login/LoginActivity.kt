@@ -1,14 +1,15 @@
 package ar.com.wolox.android.example.ui.login
 
 import ar.com.wolox.android.R
-import ar.com.wolox.android.databinding.ActivityLoginBinding
+import ar.com.wolox.android.databinding.ActivityRootBinding
 import ar.com.wolox.wolmo.core.activity.WolmoActivity
 
-class LoginActivity : WolmoActivity<ActivityLoginBinding>() {
+class LoginActivity : WolmoActivity<ActivityRootBinding>() {
 
-    override fun layout() = R.layout.activity_login
+    override fun layout() = R.layout.activity_root
 
     override fun init() {
-        replaceFragment(binding.activityLoginContent.id, LoginFragment.newInstance())
+        replaceFragment(binding.activityRootContent.id, LoginFragment.newInstance())
+
     }
 }
