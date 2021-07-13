@@ -5,7 +5,6 @@ apply plugin: 'idea'
 apply plugin: 'com.hiya.jacoco-android'
 apply from: 'keystore.gradle'
 apply from: '../quality.gradle'
-apply from: '../scripts/warp/warp_task.gradle'
 apply from: '../scripts/sanity/sanity_task.gradle'
 
 idea {
@@ -115,6 +114,7 @@ buildscript {
 }
 
 dependencies {
+    implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Kotlin
@@ -149,7 +149,5 @@ dependencies {
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
 
-    // Android KTX
-    implementation "androidx.core:core-ktx:$android_ktx_version"
-    implementation "androidx.fragment:fragment-ktx:$android_ktx_version"
+
 }
