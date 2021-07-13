@@ -38,12 +38,11 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
     }
 
     override fun goToHomePage() {
-        HomePageActivity.start(requireContext())
-        val sharedPref: SharedPreferences? = activity?.getSharedPreferences(R.string.prefs_name.toString(), Context.MODE_PRIVATE)
+        val sharedPref: SharedPreferences? = activity?.getSharedPreferences(context?.getString(R.string.prefs_name), Context.MODE_PRIVATE)
         if (sharedPref != null) {
-            sharedPref.edit().putString(R.string.login.toString(), "login").apply()
-            sharedPref.edit().putBoolean(R.string.state.toString(), true).apply()
+            sharedPref.edit().putBoolean(context?.getString(R.string.state), true).apply()
         }
+        HomePageActivity.start(requireContext())
     }
     override fun goToSignUp() = SignUpActivity.start(requireContext())
     override fun goToWeb(url: String) = requireContext().openBrowser(url)

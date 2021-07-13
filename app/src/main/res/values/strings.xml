@@ -25,8 +25,7 @@
     <string name="email">Email</string>
     <string name="password">contraseña</string>
     <string name="terms">By joining you agree to our <u>Terms &amp; Conditions</u></string>
-    <string name="prefs_name">shared_preference_name</string>
-    <string name="login">LOGIN</string>
+    <string name="prefs_name">LOGIN_STATE</string>
     <string name="state">state</string>
 
 

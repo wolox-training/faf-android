@@ -12,8 +12,8 @@ class RootActivity : WolmoActivity<ActivityRootBinding>() {
     override fun layout() = R.layout.activity_root
 
     override fun init() {
-        val sharedPref: SharedPreferences? = getSharedPreferences(R.string.prefs_name.toString(), Context.MODE_PRIVATE)
-        val state = sharedPref?.getBoolean(R.string.state.toString(), false)
+        val sharedPref: SharedPreferences? = getSharedPreferences(getString(R.string.prefs_name), Context.MODE_PRIVATE)
+        val state = sharedPref?.getBoolean(getString(R.string.state), false)
         if (state == true) {
             replaceFragment(binding.activityRootContent.id, HomePageFragment.newInstance())
         } else {

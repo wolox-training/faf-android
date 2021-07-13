@@ -10,6 +10,5 @@ class LoginActivity : WolmoActivity<ActivityRootBinding>() {
 
     override fun init() {
         replaceFragment(binding.activityRootContent.id, LoginFragment.newInstance())
-
     }
 }
