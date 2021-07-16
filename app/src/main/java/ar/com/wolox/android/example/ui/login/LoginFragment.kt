@@ -2,6 +2,7 @@ package ar.com.wolox.android.example.ui.login
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
@@ -26,7 +27,8 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
             buttonLogin.setOnClickListener {
                 val etEmail = editTextEmail
                 val etPassword = editTextPassword
-                presenter.onClickLogin(editTextEmail.text.toString(), editTextPassword.text.toString(), etEmail, etPassword)
+                val context = requireContext()
+                presenter.onClickLogin(editTextEmail.text.toString(), editTextPassword.text.toString(), etEmail, etPassword, context)
             }
             buttonSignup.setOnClickListener { presenter.onClickSingup() }
             textViewTerms.setOnClickListener { presenter.onClickTerms() }
@@ -46,4 +48,7 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
     }
     override fun goToSignUp() = SignUpActivity.start(requireContext())
     override fun goToWeb(url: String) = requireContext().openBrowser(url)
+    override fun showError(error: String) {
+        Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+    }
 }
