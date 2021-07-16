@@ -24,7 +24,9 @@
     <string name="log_in">LOG IN</string>
     <string name="email">Email</string>
     <string name="password">contraseña</string>
-    <string name="terms">By joining you agree to our <u>Terms &amp; Conditions></u></string>
+    <string name="terms">By joining you agree to our <u>Terms &amp; Conditions</u></string>
+    <string name="prefs_name">LOGIN_STATE</string>
+    <string name="state">state</string>
 
 
 </resources>
