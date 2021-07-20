@@ -7,7 +7,7 @@ data class LoginResponse(
     @SerializedName("email")
     val email: String,
     @SerializedName("name")
-    val mane: String,
+    val name: String,
     @SerializedName("nickname")
     val nickname: String,
     @SerializedName("created_at")

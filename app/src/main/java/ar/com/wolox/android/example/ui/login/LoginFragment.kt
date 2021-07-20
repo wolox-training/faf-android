@@ -1,7 +1,9 @@
 package ar.com.wolox.android.example.ui.login
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import ar.com.wolox.android.R
@@ -13,9 +15,15 @@ import ar.com.wolox.wolmo.core.util.openBrowser
 
 class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, LoginPresenter>(), LoginView {
 
+    lateinit var etEmail: EditText
+    lateinit var etPassword: EditText
+    lateinit var progressDialog: ProgressDialog
+
     override fun layout() = R.layout.fragment_login
 
     override fun init() {
+        etEmail = binding.editTextEmail
+        etPassword = binding.editTextPassword
     }
 
     override fun setListeners() {
@@ -25,10 +33,7 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
             editTextPassword.addTextChangedListener {}
 
             buttonLogin.setOnClickListener {
-                val etEmail = editTextEmail
-                val etPassword = editTextPassword
-                val context = requireContext()
-                presenter.onClickLogin(editTextEmail.text.toString(), editTextPassword.text.toString(), etEmail, etPassword, context)
+                presenter.onClickLogin(editTextEmail.text.toString(), editTextPassword.text.toString())
             }
             buttonSignup.setOnClickListener { presenter.onClickSingup() }
             textViewTerms.setOnClickListener { presenter.onClickTerms() }
@@ -39,16 +44,27 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
         fun newInstance() = LoginFragment()
     }
 
-    override fun goToHomePage() {
-        val sharedPref: SharedPreferences? = activity?.getSharedPreferences(context?.getString(R.string.prefs_name), Context.MODE_PRIVATE)
-        if (sharedPref != null) {
-            sharedPref.edit().putBoolean(context?.getString(R.string.state), true).apply()
-        }
-        HomePageActivity.start(requireContext())
-    }
+    override fun goToHomePage() = HomePageActivity.start(requireContext())
     override fun goToSignUp() = SignUpActivity.start(requireContext())
     override fun goToWeb(url: String) = requireContext().openBrowser(url)
-    override fun showError(error: String) {
-        Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+    override fun showError(error: String) = Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+    override fun showErrorEmail(error: String) = etEmail.setError(error)
+    override fun showErrorPassword(error: String) = etPassword.setError(error)
+    override fun showErrorFormat(error: String) = etEmail.setError(error)
+    override fun saveLoginSharedPreferences() {
+        val sharedPref: SharedPreferences? = activity?.getSharedPreferences(context?.getString(R.string.prefs_name), Context.MODE_PRIVATE)
+        if (sharedPref != null) {
+            sharedPref.edit().putBoolean(context?.getString(R.string.isUserLogin), true).apply()
+        }
+    }
+    override fun showProgressDialog() {
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("Cargando...")
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.show()
+    }
+
+    override fun dismissProgresddDialog() {
+        progressDialog.dismiss()
     }
 }

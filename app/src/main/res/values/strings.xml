@@ -26,7 +26,7 @@
     <string name="password">contraseña</string>
     <string name="terms">By joining you agree to our <u>Terms &amp; Conditions</u></string>
     <string name="prefs_name">LOGIN_STATE</string>
-    <string name="state">state</string>
+    <string name="isUserLogin">state</string>
 
     <string name="error_values">Usuario o Constraseña Incorrecto</string>
     <string name="error_conexion">"Error en la conexion a internet"</string>

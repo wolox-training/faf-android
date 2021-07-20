@@ -9,6 +9,7 @@ class ExamplePresenter @Inject constructor(private val userSession: UserSession)
     fun onLoginButtonClicked(user: String, color: String) {
         userSession.username = user
         view?.goToViewPager(color)
+        view?.dummy("Test")
     }
 
     fun onUsernameInputChanged(text: String) = view?.toggleLoginButtonEnable(text.isNotBlank())

@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.example
 
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentExampleBinding
@@ -35,6 +36,7 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
     override fun openBrowser(url: String) = requireContext().openBrowser(url)
 
     override fun openPhone(woloxPhone: String) = requireContext().openDial(woloxPhone)
+    override fun dummy(string: String) = Toast.makeText(requireContext(), string, Toast.LENGTH_SHORT).show()
 
     companion object {
         fun newInstance() = ExampleFragment()
