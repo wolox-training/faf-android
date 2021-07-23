@@ -1,20 +1,42 @@
 package ar.com.wolox.android.example.ui.login
 
-import android.widget.EditText
-import ar.com.wolox.wolmo.core.presenter.BasePresenter
+import ar.com.wolox.android.example.model.LoginRequest
+import ar.com.wolox.android.example.network.builder.networkRequest
+import ar.com.wolox.android.example.network.repository.PostRepository
+import ar.com.wolox.wolmo.core.presenter.CoroutineBasePresenter
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LoginPresenter @Inject constructor() : BasePresenter<LoginView>() {
-
-    fun onClickLogin(email: String, password: String, etEmail: EditText, etPassword: EditText) {
+class LoginPresenter @Inject constructor(private val postRepository: PostRepository) : CoroutineBasePresenter<LoginView>() {
+    fun onClickLogin(email: String, password: String) = launch {
 
         if (email.isEmpty()) {
-            etEmail.setError("Debe ingresar el email")
+            view?.showErrorEmail("Ingrese El Correo")
         } else if (password.isEmpty()) {
-            etPassword.setError("Debe ingresar la contraseña")
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(etEmail.text.toString()).matches()) {
-            etEmail.setError("example@domain.com")
-        } else { view?.goToHomePage() }
+            view?.showErrorPassword("Ingrese La Contraseña")
+        } else {
+            if (!androidx.core.util.PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()) {
+                view?.showErrorFormat("El email debe tener el formato example@example.com")
+            } else {
+                view?.showProgressDialog()
+                val user = LoginRequest(email, password)
+                networkRequest(postRepository.getLogin(user)) {
+                    onResponseSuccessful {
+                        view?.saveLoginSharedPreferences()
+                        view?.goToHomePage()
+                        view?.dismissProgresddDialog()
+                    }
+                    onResponseFailed { _, _ ->
+                        view?.showError("Correo o Contraseña Invalidos")
+                        view?.dismissProgresddDialog()
+                    }
+                    onCallFailure {
+                        view?.showError("Error En La Conexion")
+                        view?.dismissProgresddDialog()
+                    }
+                }
+            }
+        }
     }
 
     fun onClickSingup() {

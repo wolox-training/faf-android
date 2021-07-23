@@ -9,4 +9,6 @@ interface ExampleView {
     fun toggleLoginButtonEnable(isEnable: Boolean)
 
     fun openPhone(woloxPhone: String): Any
+
+    fun dummy(string: String)
 }
