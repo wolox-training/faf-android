@@ -35,7 +35,7 @@ class LoginPresenterTest : WolmoPresenterTest<LoginView, LoginPresenter>() {
 
     override fun getPresenterInstance() = LoginPresenter(postRepository)
 
-    //given an empty email, when the user presses the login button, then an error is shown
+    // given an empty email, when the user presses the login button, then an error is shown
 
     @Test
     fun `given a empty email,when the user press the login button,then error enter email is shown`() = runBlocking {
