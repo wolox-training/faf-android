@@ -26,13 +26,15 @@ class HomePageFragment private constructor() : WolmoFragment<FragmentHomePageBin
         tabLayout = binding.tabLayout
         binding.homeViewPager.adapter = SimpleFragmentPagerAdapter(childFragmentManager).apply {
             addFragments(
-                newsFragment.get() to "news",
-                profileFragment to "profile"
+                newsFragment.get() to getString(R.string.news_fragment),
+                profileFragment to getString(R.string.profile_fragment)
             )
         }
-        tabLayout.setupWithViewPager(binding.homeViewPager)
-        tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_news_icons)
-        tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_profile_icon)
+        tabLayout.apply {
+            tabLayout.setupWithViewPager(binding.homeViewPager)
+            tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_news_icons)
+            tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_profile_icon)
+        }
     }
 
     override fun setListeners() {
