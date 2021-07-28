@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
-import ar.com.wolox.android.example.ui.hompage.HomePageActivity
 import ar.com.wolox.android.example.ui.signup.SignUpActivity
+import ar.com.wolox.android.example.ui.viewpager.homeviewpager.HomeViewPagerActivity
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.util.openBrowser
 
@@ -44,7 +44,7 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
         fun newInstance() = LoginFragment()
     }
 
-    override fun goToHomePage() = HomePageActivity.start(requireContext())
+    override fun goToHomePage() = HomeViewPagerActivity.start(requireContext())
     override fun goToSignUp() = SignUpActivity.start(requireContext())
     override fun goToWeb(url: String) = requireContext().openBrowser(url)
     override fun showError(error: String) = Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
