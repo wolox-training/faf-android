@@ -34,8 +34,6 @@
     <string name="error_email">Debe ingresar el email</string>
     <string name="error_password">Debe ingresar la contraseña</string>
     <string name="error_format">El correo debe tener el formato example@domain.com</string>
-    <string name="news_fragment">news</string>
-    <string name="profile_fragment">profile</string>
 
 </resources>
 
