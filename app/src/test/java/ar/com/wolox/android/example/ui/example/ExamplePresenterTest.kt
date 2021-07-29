@@ -26,6 +26,7 @@ class ExamplePresenterTest : WolmoPresenterTest<ExampleView, ExamplePresenter>()
 
         // THEN
         verify(userSession, times(1)).username = user
+        verify(view, times(1)).dummy(user)
     }
 
     @Test

@@ -24,8 +24,16 @@
     <string name="log_in">LOG IN</string>
     <string name="email">Email</string>
     <string name="password">contraseña</string>
-    <string name="terms">By joining you agree to our <u>Terms &amp; Conditions></u></string>
+    <string name="terms">By joining you agree to our <u>Terms &amp; Conditions</u></string>
+    <string name="prefs_name">LOGIN_STATE</string>
+    <string name="isUserLogin">state</string>
 
+    <string name="error_values">Usuario o Constraseña Incorrecto</string>
+    <string name="error_conexion">"Error en la conexion a internet"</string>
+    <string name="loading">Cargando...</string>
+    <string name="error_email">Debe ingresar el email</string>
+    <string name="error_password">Debe ingresar la contraseña</string>
+    <string name="error_format">El correo debe tener el formato example@domain.com</string>
 
 </resources>
 
