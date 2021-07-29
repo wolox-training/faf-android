@@ -48,4 +48,5 @@
 
 
     <!-- Add your custom dimens here -->
+    <dimen name="image_view_medium">64dp</dimen>
 </resources>

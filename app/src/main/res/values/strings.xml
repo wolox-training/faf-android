@@ -36,6 +36,10 @@
     <string name="error_format">El correo debe tener el formato example@domain.com</string>
     <string name="news_fragment">news</string>
     <string name="profile_fragment">profile</string>
+    <string name="empty_news">Empty Section</string>
+    <string name="news_title">Ali Connors</string>
+    <string name="news_content">I´ll be in you neighborhood doing errands...</string>
+    <string name="news_timeago">15m</string>
 
 </resources>
 

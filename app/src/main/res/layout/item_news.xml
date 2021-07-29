@@ -7,20 +7,31 @@
 
     <ImageView
         android:id="@+id/imageViewPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="@dimen/image_view_medium"
+        android:layout_height="@dimen/image_view_medium"
+        android:layout_marginStart="@dimen/spacing_medium_more"
+        android:layout_marginTop="@dimen/spacing_medium_more"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_tiny"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewPhoto"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_large"
+        />
 
     <TextView
-        android:id="@+id/textViewUser"
+        android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="TextView"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:text="@string/news_title"
         app:layout_constraintStart_toEndOf="@+id/imageViewPhoto"
         app:layout_constraintTop_toTopOf="@+id/imageViewPhoto" />
 
@@ -28,20 +39,20 @@
         android:id="@+id/textViewTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewUser"
+        android:text="@string/news_timeago"
+        android:layout_marginEnd="@dimen/spacing_medium_more"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewUser" />
+        app:layout_constraintTop_toTopOf="@+id/textViewTitle" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="0dp"
+        android:id="@+id/textViewContent"
+        android:layout_width="@dimen/spacing_none"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/news_content"
         app:layout_constraintEnd_toStartOf="@+id/imageViewLike"
-        app:layout_constraintStart_toStartOf="@+id/textViewUser"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUser" />
+        app:layout_constraintStart_toStartOf="@+id/textViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
     <ImageView
         android:id="@+id/imageViewLike"
@@ -49,5 +60,5 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/textViewTime"
         app:layout_constraintTop_toBottomOf="@+id/textViewTime"
-        app:srcCompat="@android:drawable/ic_menu_info_details" />
+        android:src="@drawable/ic_favorite_border" />
 </androidx.constraintlayout.widget.ConstraintLayout>
