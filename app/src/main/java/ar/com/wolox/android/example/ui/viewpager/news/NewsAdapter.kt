@@ -15,26 +15,31 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import kotlin.collections.ArrayList
 
-class NewsAdapter constructor(var context: Context, var listNews: ArrayList<ItemNewsModel>) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter constructor(var context: Context, var listNews: ArrayList<ItemNewsModel>) :
+    RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
+    val formatDate = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
         return NewsViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
+        holder.apply {
+            newsContent.setText(listNews[position].newsContent)
+            newsTitle.setText(listNews[position].newsTitle)
+            newsLike.setImageResource(listNews[position].newsLike)
+            Glide.with(context).load(R.mipmap.ic_launcher).into(newsPhoto)
+            val time = SimpleDateFormat(formatDate).parse(listNews[position].newsTime).time
+            val newsTimeAgo = PrettyTime().format(Date(time))
+            holder.newsTime.setText(newsTimeAgo)
+        }
 
-        holder.newsContent.setText(listNews[position].newsContent)
-        holder.newsTitle.setText(listNews[position].newsTitle)
-        holder.newsLike.setImageResource(listNews[position].newsLike)
-        Glide.with(context).load(R.mipmap.ic_launcher).into(holder.newsPhoto)
-        val time = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(listNews[position].newsTime).time
-        val newsTimeAgo = PrettyTime().format(Date(time))
-        holder.newsTime.setText(newsTimeAgo)
+
     }
 
     override fun getItemCount(): Int {
-        if (listNews.size >0) {
+        if (listNews.size > 0) {
             return listNews.size
         }
         return 0

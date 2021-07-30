@@ -49,4 +49,7 @@
 
     <!-- Add your custom dimens here -->
     <dimen name="image_view_medium">64dp</dimen>
+    <dimen name="icon_medim">16dp</dimen>
+    <dimen name="icon_big">24dp</dimen>
+
 </resources>

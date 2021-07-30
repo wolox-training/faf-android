@@ -13,26 +13,29 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
     override fun layout() = R.layout.fragment_news
 
     override fun init() {
-        presenter.setListNews()
+        presenter.onInit()
     }
 
     override fun setListeners() {
         binding.newsSwipeToRefresh.setOnRefreshListener {
-            presenter.refreshNews()
+            presenter.onSwipeRefresh()
         }
     }
 
-    override fun loadRecyclerView(listNews: ArrayList<ItemNewsModel>) {
-        binding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.newsRecyclerView.adapter = NewsAdapter(requireContext(), listNews)
+    override fun showNewsList(listNews: ArrayList<ItemNewsModel>) {
+        with(binding){
+            newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            binding.newsRecyclerView.adapter = NewsAdapter(requireContext(), listNews)
+        }
     }
-
     override fun showEmptyNews() {
-        binding.imageViewEmptyNews.visibility = View.VISIBLE
-        binding.textViewEmptyNews.visibility = View.VISIBLE
+        with(binding){
+            imageViewEmptyNews.visibility = View.VISIBLE
+            textViewEmptyNews.visibility = View.VISIBLE
+        }
     }
     override fun refreshView() {
-        presenter.setListNews()
+        presenter.onInit()
         binding.newsSwipeToRefresh.isRefreshing = false
     }
 }

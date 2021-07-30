@@ -7,7 +7,11 @@ import javax.inject.Inject
 
 class NewsPresenter @Inject constructor() : BasePresenter<NewsView>() {
 
-    fun setListNews() {
+    fun onInit(){
+        setListNews()
+    }
+
+    private fun setListNews() {
         var list = ArrayList<ItemNewsModel>()
         for (num in 1..20) {
             if (num % 2 == 0) {
@@ -16,10 +20,13 @@ class NewsPresenter @Inject constructor() : BasePresenter<NewsView>() {
                 list.add(ItemNewsModel(R.drawable.ic_profile_icon, "Ali Connors", "I´ll be in you neighborhood doing errands...", "2021-07-29T09:00:00.000Z", R.drawable.ic_favorite_border))
             }
         }
-        if (list.isEmpty()) view?.showEmptyNews()
-        view?.loadRecyclerView(list)
+        if (list.isEmpty()) {
+            view?.showEmptyNews()
+        }else{
+            view?.showNewsList(list)
+        }
     }
-    fun refreshNews() {
+    fun onSwipeRefresh(){
         view?.refreshView()
     }
 }

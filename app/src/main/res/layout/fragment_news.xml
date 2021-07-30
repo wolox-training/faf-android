@@ -7,7 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".example.ui.viewpager.news.NewsFragment">
-
         <ImageView
             android:id="@+id/imageViewEmptyNews"
             android:layout_width="wrap_content"
@@ -18,7 +17,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
-
         <TextView
             android:id="@+id/textViewEmptyNews"
             android:layout_width="wrap_content"
@@ -28,9 +26,6 @@
             app:layout_constraintEnd_toEndOf="@+id/imageViewEmptyNews"
             app:layout_constraintStart_toStartOf="@+id/imageViewEmptyNews"
             app:layout_constraintTop_toBottomOf="@id/imageViewEmptyNews" />
-
-
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
@@ -41,7 +36,6 @@
             app:layout_constraintRight_toRightOf="parent"
             android:tint="@android:color/white"
             android:layout_margin="@dimen/spacing_large" />
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/newsSwipeToRefresh"
             android:layout_width="match_parent"
@@ -51,7 +45,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/item_news" />
-
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
