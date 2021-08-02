@@ -4,10 +4,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-
-
+        android:layout_height="match_parent">
         <ImageView
             android:id="@+id/imageViewLogo"
             android:layout_width="wrap_content"
@@ -18,7 +15,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             />
-
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="0dp"
@@ -68,7 +64,6 @@
             app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
             app:layout_constraintStart_toStartOf="@+id/buttonLogin"
             app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
-
         <TextView
             android:id="@+id/textViewTerms"
             android:layout_width="0dp"
