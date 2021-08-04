@@ -34,8 +34,6 @@ class NewsAdapter constructor(var context: Context, var listNews: ArrayList<Item
             val newsTimeAgo = PrettyTime().format(Date(time))
             holder.newsTime.setText(newsTimeAgo)
         }
-
-
     }
 
     override fun getItemCount(): Int {

@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class NewsPresenter @Inject constructor() : BasePresenter<NewsView>() {
 
-    fun onInit(){
+    fun onInit() {
         setListNews()
     }
 
@@ -22,11 +22,11 @@ class NewsPresenter @Inject constructor() : BasePresenter<NewsView>() {
         }
         if (list.isEmpty()) {
             view?.showEmptyNews()
-        }else{
+        } else {
             view?.showNewsList(list)
         }
     }
-    fun onSwipeRefresh(){
+    fun onSwipeRefresh() {
         view?.refreshView()
     }
 }

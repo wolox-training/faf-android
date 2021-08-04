@@ -1,6 +1,9 @@
 package ar.com.wolox.android.example
 
+import android.content.Context
+import android.content.SharedPreferences
 import ar.com.wolox.android.BuildConfig
+import ar.com.wolox.android.R
 import ar.com.wolox.android.example.di.DaggerAppComponent
 import ar.com.wolox.wolmo.core.WolmoApplication
 import ar.com.wolox.wolmo.networking.di.DaggerNetworkingComponent
@@ -9,6 +12,7 @@ import com.google.gson.FieldNamingPolicy
 import com.readystatesoftware.chuck.ChuckInterceptor
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
+import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 
@@ -36,8 +40,7 @@ class BootstrapApplication : WolmoApplication() {
                 .gsonNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 
         if (BuildConfig.DEBUG) {
-            builder.okHttpInterceptors(
-                    buildHttpLoggingInterceptor(Level.BODY), ChuckInterceptor(this))
+            builder.okHttpInterceptors(buildHttpLoggingInterceptor(Level.BODY), ChuckInterceptor(this))
         }
 
         return builder.build()
@@ -50,6 +53,9 @@ class BootstrapApplication : WolmoApplication() {
      * @return New instance of interceptor
      */
     private fun buildHttpLoggingInterceptor(newLevel: HttpLoggingInterceptor.Level): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply { this.level = newLevel }
+        return HttpLoggingInterceptor().apply {
+            this.level = newLevel
+        }
     }
+
 }

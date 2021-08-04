@@ -23,13 +23,13 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
     }
 
     override fun showNewsList(listNews: ArrayList<ItemNewsModel>) {
-        with(binding){
+        with(binding) {
             newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
             binding.newsRecyclerView.adapter = NewsAdapter(requireContext(), listNews)
         }
     }
     override fun showEmptyNews() {
-        with(binding){
+        with(binding) {
             imageViewEmptyNews.visibility = View.VISIBLE
             textViewEmptyNews.visibility = View.VISIBLE
         }
