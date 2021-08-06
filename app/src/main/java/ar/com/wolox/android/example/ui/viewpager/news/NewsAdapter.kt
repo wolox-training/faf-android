@@ -8,14 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
-import ar.com.wolox.android.example.model.ItemNewsModel
+import ar.com.wolox.android.example.model.responses.Page
 import com.bumptech.glide.Glide
 import org.ocpsoft.prettytime.PrettyTime
 import java.text.SimpleDateFormat
 import java.util.Date
 import kotlin.collections.ArrayList
 
-class NewsAdapter constructor(var context: Context, var listNews: ArrayList<ItemNewsModel>) :
+class NewsAdapter constructor(var context: Context, var listNews: ArrayList<Page>) :
     RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     val formatDate = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
@@ -26,11 +26,15 @@ class NewsAdapter constructor(var context: Context, var listNews: ArrayList<Item
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         holder.apply {
-            newsContent.setText(listNews[position].newsContent)
-            newsTitle.setText(listNews[position].newsTitle)
-            newsLike.setImageResource(listNews[position].newsLike)
-            Glide.with(context).load(R.mipmap.ic_launcher).into(newsPhoto)
-            val time = SimpleDateFormat(formatDate).parse(listNews[position].newsTime).time
+            newsContent.setText(listNews[position].comment)
+            newsTitle.setText(listNews[position].commenter)
+            if (listNews[position].likes.size > 0) {
+                newsLike.setImageResource(R.drawable.ic_favorite)
+            } else {
+                newsLike.setImageResource(R.drawable.ic_favorite_border)
+            }
+            Glide.with(context).load(listNews[position].avatar).error(R.mipmap.ic_launcher).into(newsPhoto)
+            val time = SimpleDateFormat(formatDate).parse(listNews[position].created_at).time
             val newsTimeAgo = PrettyTime().format(Date(time))
             holder.newsTime.setText(newsTimeAgo)
         }

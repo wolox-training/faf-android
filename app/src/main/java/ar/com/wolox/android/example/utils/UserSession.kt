@@ -19,4 +19,36 @@ class UserSession @Inject constructor(private val sharedPreferencesManager: Shar
             field = username
             sharedPreferencesManager.store(Extras.UserLogin.USERNAME, username)
         }
+    var accessToken: String? = null
+        get() = field ?: sharedPreferencesManager[Extras.UserLogin.TOKEN, null].also {
+            field = it
+        }
+        set(token) {
+            field = token
+            sharedPreferencesManager.store(Extras.UserLogin.TOKEN, token)
+        }
+    var client: String? = null
+        get() = field ?: sharedPreferencesManager[Extras.UserLogin.CLIENT, null].also {
+            field = it
+        }
+        set(client) {
+            field = client
+            sharedPreferencesManager.store(Extras.UserLogin.CLIENT, client)
+        }
+    var uid: String? = null
+        get() = field ?: sharedPreferencesManager[Extras.UserLogin.UID, null].also {
+            field = it
+        }
+        set(uid) {
+            field = uid
+            sharedPreferencesManager.store(Extras.UserLogin.UID, uid)
+        }
+    var islogin: Boolean? = null
+        get() = field ?: sharedPreferencesManager[Extras.UserLogin.ISLOGIN, false].also {
+            field = it
+        }
+        set(value) {
+            field = value
+            value?.let { sharedPreferencesManager.store(Extras.UserLogin.ISLOGIN, it) }
+        }
 }

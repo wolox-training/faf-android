@@ -19,7 +19,7 @@
         android:layout_height="@dimen/spacing_tiny"
         android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageViewPhoto"
+        app:layout_constraintTop_toBottomOf="@id/textViewContent"
         android:layout_marginTop="@dimen/spacing_large"
         android:layout_marginBottom="@dimen/spacing_large"
         />
