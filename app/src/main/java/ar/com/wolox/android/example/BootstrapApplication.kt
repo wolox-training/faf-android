@@ -16,7 +16,6 @@ import dagger.android.AndroidInjector
 import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
-import javax.inject.Inject
 
 class BootstrapApplication : WolmoApplication() {
 

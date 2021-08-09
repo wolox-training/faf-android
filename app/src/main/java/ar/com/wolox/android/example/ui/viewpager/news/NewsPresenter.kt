@@ -1,7 +1,5 @@
 package ar.com.wolox.android.example.ui.viewpager.news
 
-import ar.com.wolox.android.R
-import ar.com.wolox.android.example.model.ItemNewsModel
 import ar.com.wolox.android.example.model.responses.Page
 import ar.com.wolox.android.example.network.builder.networkRequest
 import ar.com.wolox.android.example.network.repository.PostRepository
@@ -11,12 +9,16 @@ import javax.inject.Inject
 
 class NewsPresenter @Inject constructor(private val postRepository: PostRepository) : CoroutineBasePresenter<NewsView>() {
 
+    var list = ArrayList<Page>()
+    var next_page = 0
+    private var respuesta = ArrayList<Page>()
     fun onInit() = launch {
-        var list = ArrayList<Page>()
         networkRequest(postRepository.getAllNews()) {
                 onResponseSuccessful { response ->
-                    if (response != null) {
-                       list  = response.page as ArrayList<Page>
+                    next_page = response!!.next_page
+                    respuesta = response.page as ArrayList<Page>
+                    if (respuesta != null) {
+                            list = respuesta
                     }
                     if (list.isEmpty()) {
                         view?.showEmptyNews()
@@ -30,5 +32,19 @@ class NewsPresenter @Inject constructor(private val postRepository: PostReposito
     }
     fun onSwipeRefresh() {
         view?.refreshView()
+    }
+    fun loadNextNews() = launch {
+        networkRequest(postRepository.getNextPageNews(next_page)) {
+            onResponseSuccessful { response ->
+                next_page = response!!.next_page
+                var lista = ArrayList<Page>()
+                for (aux in lista) {
+                    list.add(aux)
+                }
+                view?.showMoreNewsList(list)
+            }
+            onResponseFailed { _, _ -> view?.toast("Error en el servidor") }
+            onCallFailure { view?.toast("Error en la conexion") }
+        }
     }
 }

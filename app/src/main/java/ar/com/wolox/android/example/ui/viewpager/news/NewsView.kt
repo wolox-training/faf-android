@@ -7,4 +7,5 @@ interface NewsView {
     fun showEmptyNews()
     fun refreshView()
     fun toast(string: String)
+    fun showMoreNewsList(listNews: ArrayList<Page>)
 }

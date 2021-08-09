@@ -3,6 +3,7 @@ package ar.com.wolox.android.example.ui.viewpager.news
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentNewsBinding
 import ar.com.wolox.android.example.model.responses.Page
@@ -21,6 +22,14 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
         binding.newsSwipeToRefresh.setOnRefreshListener {
             presenter.onSwipeRefresh()
         }
+        binding.newsRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1)) {
+                    presenter.loadNextNews()
+                }
+            }
+        })
     }
 
     override fun showNewsList(listNews: ArrayList<Page>) {
@@ -42,5 +51,12 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
 
     override fun toast(string: String) {
         Toast.makeText(requireContext(), string, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showMoreNewsList(listNews: ArrayList<Page>) {
+        with(binding) {
+            newsRecyclerView.adapter = NewsAdapter(requireContext(), listNews)
+            newsRecyclerView.adapter?.notifyDataSetChanged()
+        }
     }
 }

@@ -20,6 +20,9 @@ class PostRepository @Inject constructor(private val retrofitServices: RetrofitS
         NetworkRequestHandler.safeApiCall { service.doLogin(loginRequest) }
     }
     suspend fun getAllNews() = withContext(Dispatchers.IO) {
-        NetworkRequestHandler.safeApiCall { service.getnews() }
+        NetworkRequestHandler.safeApiCall { service.getNews() }
+    }
+    suspend fun getNextPageNews(page: Int) = withContext(Dispatchers.IO) {
+        NetworkRequestHandler.safeApiCall { service.getNextNews(page) }
     }
 }
