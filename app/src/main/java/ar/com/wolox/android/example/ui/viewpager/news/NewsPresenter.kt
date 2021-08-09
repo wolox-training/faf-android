@@ -11,14 +11,19 @@ class NewsPresenter @Inject constructor(private val postRepository: PostReposito
 
     var list = ArrayList<Page>()
     var next_page = 0
+    var countNews = 0
+    val offset = 10
     private var respuesta = ArrayList<Page>()
     fun onInit() = launch {
+        countNews += 10
         networkRequest(postRepository.getAllNews()) {
                 onResponseSuccessful { response ->
                     next_page = response!!.next_page
                     respuesta = response.page as ArrayList<Page>
                     if (respuesta != null) {
-                            list = respuesta
+                        for (i in 0..countNews) {
+                            list.add(respuesta[i])
+                        }
                     }
                     if (list.isEmpty()) {
                         view?.showEmptyNews()
@@ -34,17 +39,28 @@ class NewsPresenter @Inject constructor(private val postRepository: PostReposito
         view?.refreshView()
     }
     fun loadNextNews() = launch {
-        networkRequest(postRepository.getNextPageNews(next_page)) {
-            onResponseSuccessful { response ->
-                next_page = response!!.next_page
-                var lista = ArrayList<Page>()
-                for (aux in lista) {
-                    list.add(aux)
-                }
-                view?.showMoreNewsList(list)
+        countNews += 10
+        if (countNews < 20) {
+            for (i in countNews - offset..countNews) {
+                list.add(respuesta[i])
             }
-            onResponseFailed { _, _ -> view?.toast("Error en el servidor") }
-            onCallFailure { view?.toast("Error en la conexion") }
+            view?.showMoreNewsList(list)
+        } else {
+            countNews = 10
+            networkRequest(postRepository.getNextPageNews(next_page)) {
+                onResponseSuccessful { response ->
+                    next_page = response!!.next_page
+                    respuesta = response.page as ArrayList<Page>
+                    if (respuesta != null) {
+                        for (i in 0..countNews) {
+                            list.add(respuesta[i])
+                        }
+                    }
+                    view?.showMoreNewsList(list)
+                }
+                onResponseFailed { _, _ -> view?.toast("Error en el servidor") }
+                onCallFailure { view?.toast("Error en la conexion") }
+            }
         }
     }
 }
