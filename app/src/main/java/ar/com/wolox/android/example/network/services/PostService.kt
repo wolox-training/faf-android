@@ -18,7 +18,5 @@ interface PostService {
     @POST("auth/sign_in")
     suspend fun doLogin(@Body loguinRequest: LoginRequest): Response<LoginResponse>
     @GET("comments")
-    suspend fun getNews(): Response<NewsResponse>
-    @GET("comments")
-    suspend fun getNextNews(@Query("page") page: Int): Response<NewsResponse>
+    suspend fun getNews(@Query("page") page: Int? = null): Response<NewsResponse>
 }

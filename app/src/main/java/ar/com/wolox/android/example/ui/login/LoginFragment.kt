@@ -53,13 +53,10 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
     override fun showErrorPassword(error: String) = etPassword.setError(error)
     override fun showErrorFormat(error: String) = etEmail.setError(error)
     override fun saveLoginSharedPreferences() {
-
         val sharedPref: SharedPreferences? = activity?.getSharedPreferences(context?.getString(R.string.prefs_name), Context.MODE_PRIVATE)
         if (sharedPref != null) {
             sharedPref.edit().putBoolean(Extras.UserLogin.ISLOGIN, true).apply()
         }
-        val token = sharedPref?.getString("token", "nada")
-        Toast.makeText(requireContext(), token, Toast.LENGTH_LONG).show()
     }
     override fun showProgressDialog() {
         progressDialog = ProgressDialog(requireContext())

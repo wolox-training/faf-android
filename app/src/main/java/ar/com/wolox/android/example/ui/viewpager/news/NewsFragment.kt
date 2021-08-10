@@ -54,7 +54,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
     }
 
     override fun showMoreNewsList(listNews: ArrayList<Page>) {
-        with(binding) {
+        binding.apply {
             newsRecyclerView.adapter = NewsAdapter(requireContext(), listNews)
             newsRecyclerView.adapter?.notifyDataSetChanged()
         }

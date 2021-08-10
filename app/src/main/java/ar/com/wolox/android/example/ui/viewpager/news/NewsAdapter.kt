@@ -1,6 +1,7 @@
 package ar.com.wolox.android.example.ui.viewpager.news
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.responses.Page
+import ar.com.wolox.android.example.ui.viewpager.detailnews.DetailActivity
 import com.bumptech.glide.Glide
 import org.ocpsoft.prettytime.PrettyTime
 import java.text.SimpleDateFormat
@@ -21,7 +23,7 @@ class NewsAdapter constructor(var context: Context, var listNews: ArrayList<Page
     val formatDate = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
-        return NewsViewHolder(view)
+        return NewsViewHolder(view, context)
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
@@ -47,7 +49,7 @@ class NewsAdapter constructor(var context: Context, var listNews: ArrayList<Page
         return 0
     }
 
-    class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class NewsViewHolder(itemView: View, context: Context) : RecyclerView.ViewHolder(itemView) {
         var newsPhoto: ImageView
         var newsTitle: TextView
         var newsContent: TextView
@@ -60,6 +62,10 @@ class NewsAdapter constructor(var context: Context, var listNews: ArrayList<Page
             newsContent = itemView.findViewById(R.id.textViewContent)
             newsTime = itemView.findViewById(R.id.textViewTime)
             newsLike = itemView.findViewById(R.id.imageViewLike)
+            itemView.setOnClickListener {
+                Log.i("tocando", newsTitle.text.toString())
+                DetailActivity.start(context)
+            }
         }
     }
 }
