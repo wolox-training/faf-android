@@ -1,7 +1,6 @@
 package ar.com.wolox.android.example.ui.viewpager.news
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.responses.Page
-import ar.com.wolox.android.example.ui.viewpager.detailnews.DetailActivity
 import com.bumptech.glide.Glide
 import org.ocpsoft.prettytime.PrettyTime
 import java.text.SimpleDateFormat
@@ -62,10 +60,6 @@ class NewsAdapter constructor(var context: Context, var listNews: ArrayList<Page
             newsContent = itemView.findViewById(R.id.textViewContent)
             newsTime = itemView.findViewById(R.id.textViewTime)
             newsLike = itemView.findViewById(R.id.imageViewLike)
-            itemView.setOnClickListener {
-                Log.i("tocando", newsTitle.text.toString())
-                DetailActivity.start(context)
-            }
         }
     }
 }
