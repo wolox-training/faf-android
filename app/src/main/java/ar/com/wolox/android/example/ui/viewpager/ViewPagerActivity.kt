@@ -22,8 +22,6 @@ class ViewPagerActivity @Inject constructor() : WolmoActivity<ActivityBaseBindin
 
     companion object {
 
-        fun start(context: Context, favouriteColor: String) = context.jumpTo(
-            ViewPagerActivity::class.java,
-            FAVOURITE_COLOR_KEY to favouriteColor)
+        fun start(context: Context, favouriteColor: String) = context.jumpTo(ViewPagerActivity::class.java, FAVOURITE_COLOR_KEY to favouriteColor)
     }
 }

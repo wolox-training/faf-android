@@ -10,6 +10,7 @@ import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
 import ar.com.wolox.android.example.ui.signup.SignUpActivity
 import ar.com.wolox.android.example.ui.viewpager.homeviewpager.HomeViewPagerActivity
+import ar.com.wolox.android.example.utils.Extras
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.util.openBrowser
 
@@ -52,10 +53,9 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
     override fun showErrorPassword(error: String) = etPassword.setError(error)
     override fun showErrorFormat(error: String) = etEmail.setError(error)
     override fun saveLoginSharedPreferences() {
-
         val sharedPref: SharedPreferences? = activity?.getSharedPreferences(context?.getString(R.string.prefs_name), Context.MODE_PRIVATE)
         if (sharedPref != null) {
-            sharedPref.edit().putBoolean(context?.getString(R.string.isUserLogin), true).apply()
+            sharedPref.edit().putBoolean(Extras.UserLogin.ISLOGIN, true).apply()
         }
     }
     override fun showProgressDialog() {

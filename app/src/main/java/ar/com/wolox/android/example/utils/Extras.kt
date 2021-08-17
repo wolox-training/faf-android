@@ -12,6 +12,10 @@ object Extras {
 
     object UserLogin {
         const val USERNAME = "username"
+        const val TOKEN = "token"
+        const val CLIENT = "client"
+        const val UID = "uid"
+        const val ISLOGIN = "islogin"
     }
 
     object ViewPager {

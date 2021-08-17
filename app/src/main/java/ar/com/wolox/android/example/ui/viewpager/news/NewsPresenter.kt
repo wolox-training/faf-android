@@ -1,23 +1,58 @@
 package ar.com.wolox.android.example.ui.viewpager.news
 
-import ar.com.wolox.android.R
-import ar.com.wolox.android.example.model.ItemNewsModel
-import ar.com.wolox.wolmo.core.presenter.BasePresenter
+import ar.com.wolox.android.example.model.responses.NewsResponse
+import ar.com.wolox.android.example.model.responses.Page
+import ar.com.wolox.android.example.network.builder.networkRequest
+import ar.com.wolox.android.example.network.repository.PostRepository
+import ar.com.wolox.wolmo.core.presenter.CoroutineBasePresenter
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class NewsPresenter @Inject constructor() : BasePresenter<NewsView>() {
+class NewsPresenter @Inject constructor(private val postRepository: PostRepository) : CoroutineBasePresenter<NewsView>() {
 
-    fun onInit() {
-        setListNews()
+    var list = ArrayList<Page>()
+    var next_page = 0
+    var countNews = 0
+    val offset = 10
+    private var response_news = ArrayList<Page>()
+    fun onInit() = launch {
+        countNews += 10
+        networkRequest(postRepository.getPageNews(null)) {
+                onResponseSuccessful { response ->
+                    responseToListNews(response!!)
+                }
+                onResponseFailed { _, _ -> view?.toast("Error en el servidor") }
+                onCallFailure { view?.toast("Error en la conexion") }
+        }
+    }
+    fun onSwipeRefresh() {
+        view?.refreshView()
+    }
+    fun loadNextNews() = launch {
+        countNews += 10
+        if (countNews < 20) {
+            for (i in countNews - offset..countNews) {
+                list.add(response_news[i])
+            }
+            view?.showMoreNewsList(list)
+        } else {
+            countNews = 10
+            networkRequest(postRepository.getPageNews(next_page)) {
+                onResponseSuccessful { response ->
+                    responseToListNews(response!!)
+                }
+                onResponseFailed { _, _ -> view?.toast("Error en el servidor") }
+                onCallFailure { view?.toast("Error en la conexion") }
+            }
+        }
     }
 
-    private fun setListNews() {
-        var list = ArrayList<ItemNewsModel>()
-        for (num in 1..20) {
-            if (num % 2 == 0) {
-                list.add(ItemNewsModel(R.drawable.ic_profile_icon, "Ali Connors", "I´ll be in you neighborhood doing errands...", "2021-07-29T11:00:00.000Z", R.drawable.ic_favorite))
-            } else {
-                list.add(ItemNewsModel(R.drawable.ic_profile_icon, "Ali Connors", "I´ll be in you neighborhood doing errands...", "2021-07-29T09:00:00.000Z", R.drawable.ic_favorite_border))
+    private fun responseToListNews(response: NewsResponse) {
+        next_page = response!!.next_page
+        response_news = response.page as ArrayList<Page>
+        if (response_news != null) {
+            for (i in 0..countNews) {
+                list.add(response_news[i])
             }
         }
         if (list.isEmpty()) {
@@ -25,8 +60,5 @@ class NewsPresenter @Inject constructor() : BasePresenter<NewsView>() {
         } else {
             view?.showNewsList(list)
         }
-    }
-    fun onSwipeRefresh() {
-        view?.refreshView()
     }
 }

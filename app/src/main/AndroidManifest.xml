@@ -33,7 +33,8 @@
         <activity android:name=".example.ui.example.ExampleActivity" />
         <activity android:name=".example.ui.signup.SignUpActivity" />
         <activity android:name=".example.ui.hompage.HomePageActivity" />
-        <activity android:name=".example.ui.viewpager.homepageviewpager.HomePageViewPagerActivity" />
+        <activity android:name=".example.ui.viewpager.homeviewpager.HomeViewPagerActivity" />
+
         <activity
             android:name=".example.ui.viewpager.ViewPagerActivity"
             android:screenOrientation="portrait" />
