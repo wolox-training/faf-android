@@ -15,7 +15,6 @@
         <activity android:name=".example.ui.RootActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
-            android:noHistory="true"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,6 +33,7 @@
         <activity android:name=".example.ui.signup.SignUpActivity" />
         <activity android:name=".example.ui.hompage.HomePageActivity" />
         <activity android:name=".example.ui.viewpager.homeviewpager.HomeViewPagerActivity" />
+        <activity android:name=".example.ui.viewpager.detailnews.DetailActivity"/>
 
         <activity
             android:name=".example.ui.viewpager.ViewPagerActivity"

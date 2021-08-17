@@ -18,24 +18,28 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
         presenter.onInit()
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.onRefresh()
+    }
     override fun setListeners() {
-        binding.newsSwipeToRefresh.setOnRefreshListener {
-            presenter.onSwipeRefresh()
-        }
-        binding.newsRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1)) {
-                    presenter.loadNextNews()
+        with(binding) {
+            newsSwipeToRefresh.setOnRefreshListener { presenter.onRefresh() }
+            newsRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    if (!recyclerView.canScrollVertically(1)) {
+                        presenter.loadNextNews()
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 
     override fun showNewsList(listNews: ArrayList<Page>) {
         with(binding) {
             newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-            binding.newsRecyclerView.adapter = NewsAdapter(requireContext(), listNews)
+            newsRecyclerView.adapter = NewsAdapter(requireContext(), listNews)
         }
     }
     override fun showEmptyNews() {
@@ -44,8 +48,10 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
             textViewEmptyNews.visibility = View.VISIBLE
         }
     }
-    override fun refreshView() {
-        presenter.onInit()
+    override fun refreshView(listNews: ArrayList<Page>) {
+        binding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.newsRecyclerView.adapter = NewsAdapter(requireContext(), listNews)
+        binding.newsRecyclerView.adapter?.notifyDataSetChanged()
         binding.newsSwipeToRefresh.isRefreshing = false
     }
 

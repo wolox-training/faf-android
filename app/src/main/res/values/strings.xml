@@ -41,6 +41,11 @@
     <string name="news_content">I´ll be in you neighborhood doing errands...</string>
     <string name="news_timeago">15m</string>
 
+    <string name="comment">comment</string>
+    <string name="commenter">commenter</string>
+    <string name="time_ago">timeago</string>
+    <string name="is_news_liked">isnewsliked</string>
+    <string name="news_id">newsid</string>
 </resources>
 
 
