@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.login
 
+import android.util.Log
 import ar.com.wolox.android.example.model.LoginRequest
 import ar.com.wolox.android.example.network.builder.networkRequest
 import ar.com.wolox.android.example.network.repository.PostRepository
@@ -21,8 +22,9 @@ class LoginPresenter @Inject constructor(private val postRepository: PostReposit
                 view?.showProgressDialog()
                 val user = LoginRequest(email, password)
                 networkRequest(postRepository.getLogin(user)) {
-                    onResponseSuccessful {
-                        view?.saveLoginSharedPreferences()
+                    onResponseSuccessful { response ->
+                        Log.i("resposse", response?.data?.name.toString())
+                        view?.saveLoginSharedPreferences(response?.data?.id)
                         view?.goToHomePage()
                         view?.dismissProgresddDialog()
                     }

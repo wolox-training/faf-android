@@ -9,7 +9,7 @@ interface LoginView {
     fun showErrorEmail(error: String)
     fun showErrorPassword(error: String)
     fun showErrorFormat(error: String)
-    fun saveLoginSharedPreferences()
+    fun saveLoginSharedPreferences(id: Int?)
     fun showProgressDialog()
     fun dismissProgresddDialog()
 }

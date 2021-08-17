@@ -16,9 +16,11 @@ object Extras {
         const val CLIENT = "client"
         const val UID = "uid"
         const val ISLOGIN = "islogin"
+        const val ID = "id"
     }
 
     object ViewPager {
         const val FAVOURITE_COLOR_KEY = "FAVOURITE_COLOR_KEY"
+        const val DETAIL_BUNDLE = "DETAIL_BUNDLE"
     }
 }

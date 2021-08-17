@@ -1,9 +1,11 @@
 package ar.com.wolox.android.example.model
 import com.google.gson.annotations.SerializedName
 
-data class LoginResponse(
+data class LoginResponse(@SerializedName("data")val data: Data)
+
+data class Data(
     @SerializedName("id")
-    val id: String,
+    val id: Int,
     @SerializedName("email")
     val email: String,
     @SerializedName("name")

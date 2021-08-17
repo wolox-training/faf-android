@@ -18,15 +18,30 @@ class NewsPresenter @Inject constructor(private val postRepository: PostReposito
     fun onInit() = launch {
         countNews += 10
         networkRequest(postRepository.getPageNews(null)) {
-                onResponseSuccessful { response ->
-                    responseToListNews(response!!)
-                }
-                onResponseFailed { _, _ -> view?.toast("Error en el servidor") }
-                onCallFailure { view?.toast("Error en la conexion") }
+            onResponseSuccessful { response ->
+                responseToListNews(response!!)
+            }
+            onResponseFailed { _, _ -> view?.toast("Error en el servidor") }
+            onCallFailure { view?.toast("Error en la conexion") }
         }
     }
-    fun onSwipeRefresh() {
-        view?.refreshView()
+    fun onRefresh() = launch {
+        countNews = 10
+        networkRequest(postRepository.getPageNews(null)) {
+            onResponseSuccessful { response ->
+                list.clear()
+                next_page = response!!.next_page
+                response_news = response.page as ArrayList<Page>
+                if (response_news != null) {
+                    for (i in 0..countNews) {
+                        list.add(response_news[i])
+                    }
+                }
+                view?.refreshView(list)
+            }
+            onResponseFailed { _, _ -> view?.toast("Error en el servidor") }
+            onCallFailure { view?.toast("Error en la conexion") }
+        }
     }
     fun loadNextNews() = launch {
         countNews += 10

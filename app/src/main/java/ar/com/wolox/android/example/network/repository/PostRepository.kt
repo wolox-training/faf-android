@@ -22,4 +22,10 @@ class PostRepository @Inject constructor(private val retrofitServices: RetrofitS
     suspend fun getPageNews(page: Int?) = withContext(Dispatchers.IO) {
         NetworkRequestHandler.safeApiCall { service.getNews(page) }
     }
+    suspend fun likeNews(idLike: Int) = withContext(Dispatchers.IO) {
+        NetworkRequestHandler.safeApiCall { service.doLike(idLike) }
+    }
+    suspend fun getNewsById(idnews: Int) = withContext(Dispatchers.IO) {
+        NetworkRequestHandler.safeApiCall { service.getNewsById(idnews) }
+    }
 }

@@ -3,6 +3,7 @@ package ar.com.wolox.android.example.ui.login
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
@@ -52,10 +53,12 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
     override fun showErrorEmail(error: String) = etEmail.setError(error)
     override fun showErrorPassword(error: String) = etPassword.setError(error)
     override fun showErrorFormat(error: String) = etEmail.setError(error)
-    override fun saveLoginSharedPreferences() {
+    override fun saveLoginSharedPreferences(id: Int?) {
+        Log.i("userid", id.toString())
         val sharedPref: SharedPreferences? = activity?.getSharedPreferences(context?.getString(R.string.prefs_name), Context.MODE_PRIVATE)
         if (sharedPref != null) {
             sharedPref.edit().putBoolean(Extras.UserLogin.ISLOGIN, true).apply()
+            sharedPref.edit().putInt(Extras.UserLogin.ID, id!!).apply()
         }
     }
     override fun showProgressDialog() {
